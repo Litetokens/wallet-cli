@@ -1,10 +1,10 @@
-# wallet-cli [![Build Status](https://travis-ci.org/tronprotocol/wallet-cli.svg?branch=master)](https://travis-ci.org/tronprotocol/wallet-cli)
+# wallet-cli [![Build Status](https://travis-ci.org/litetokens/wallet-cli.svg?branch=master)](https://travis-ci.org/litetokens/wallet-cli)
 Wallet CLI
 
 
 Download wallet-cli
 ---------------------------------
-git clone https://github.com/tronprotocol/wallet-cli.git
+git clone https://github.com/litetokens/wallet-cli.git
 
 
 Edit config.conf in src/main/resources
@@ -48,11 +48,11 @@ java -jar wallet-cli.jar
 ```
 
 
-How wallet-cli connects to java-tron :
+How wallet-cli connects to java-litetokens :
 --------------------------------------
-Wallet-cli connect to java-tron by grpc protocol.          
-Java-tron nodes can be deployed locally or remotely.          
-We can set the connected java-tron node IP in config.conf of wallet-cli.
+Wallet-cli connect to java-litetokens by grpc protocol.          
+Java-litetokens nodes can be deployed locally or remotely.          
+We can set the connected java-litetokens node IP in config.conf of wallet-cli.
  
 
 Wallet-cli supported command list:
@@ -115,7 +115,7 @@ freezebalance password amount time
 ```
 
 *amount:The amount of frozen funds，the unit is drop.
-The minimum value is **1000000 drop(1TRX)**.*
+The minimum value is **1000000 drop(1XLT)**.*
 
 *time：Freeze time, this value is currently only allowed for **3 days***
 
@@ -149,15 +149,15 @@ How to vote
 
 Voting requires share. Share can be obtained by freezing funds.
 
-- The share calculation method is: **1** unit of share can be obtained for every **1TRX** frozen. 
+- The share calculation method is: **1** unit of share can be obtained for every **1XLT** frozen. 
 - After unfreezing, previous vote will expire. You can avoid the invalidation of the vote by re-freezing and voting.
 
-**Note:** The Tron Network only records the status of your last vote, which means that each of your votes will cover all previous voting results.
+**Note:** The Litetokens Network only records the status of your last vote, which means that each of your votes will cover all previous voting results.
 
 For example：
 
 ```
-freezebalance 123455 10000000 3   // Freeze 10TRX and acquire 10 units of shares
+freezebalance 123455 10000000 3   // Freeze 10XLT and acquire 10 units of shares
 
 votewitness 123455 witness1 4 witness2 6   // Cast 4 votes for witness1 and 6 votes for witness2 at the same time.
 
@@ -175,7 +175,7 @@ The bandwidth calculation rule is：
 ```
 constant * FrozenFunds * days
 ```
-Assuming freeze 1TRX（1_000_000 DROP），3 days，bandwidth obtained = 1* 1_000_000 * 3 = 3_000_000. 
+Assuming freeze 1XLT（1_000_000 DROP），3 days，bandwidth obtained = 1* 1_000_000 * 3 = 3_000_000. 
 
 Any contract needs to consume bandwidth, including transfer, transfer of assets, voting, freezing, etc. 
 The query does not consume bandwidth, and each contract needs to consume **100_000 bandwidth**. 
@@ -196,14 +196,14 @@ The funds in allowance cannot be locked or traded.
 
 How to create witness
 ----------------------------------
-Applying to become a witness account needs to consume **100_000TRX**.
+Applying to become a witness account needs to consume **100_000XLT**.
 This part of the funds will be burned directly.
 
 
 How to create account
 ----------------------------------
 It is not allowed to create accounts directly. You can only create accounts by transferring funds to non-existing accounts.
-Transfer to a non-existent account with a minimum transfer amount of **1TRX**.
+Transfer to a non-existent account with a minimum transfer amount of **1XLT**.
 
 Command line operation flow example
 -----------------------------------      
@@ -219,13 +219,13 @@ getbalance                 (Print 'Balance = 0')
  
 getbalance                                                             
           
-assetIssue 123456 testAssetIssue00001 10000000000000000 1 100 2018-4-1 2018-4-30 1 just-test https://github.com/tronprotocol/wallet-cli/                   
+assetIssue 123456 testAssetIssue00001 10000000000000000 1 100 2018-4-1 2018-4-30 1 just-test https://github.com/litetokens/wallet-cli/                   
 getaccount  f286522619d962e6f93235ca27b2cb67a9e5c27b                                                                        
 (Print balance: 9999900000                                                                          
 asset {                                                                                                     
   key: "testAssetIssue00001"                                                                           
   value: 10000000000000000                                                                             
 })                                                                                                       
-(cost trx 1000 trx for assetIssue)                                                                    
-(You can query the trx balance and other asset balances for any account )                                                
+(cost xlt 1000 xlt for assetIssue)                                                                    
+(You can query the xlt balance and other asset balances for any account )                                                
 TransferAsset 123456 649DDB4AB82D558AD6809C7AB2BA43D1D1054B3F testAssetIssue00001 10000                                                     
